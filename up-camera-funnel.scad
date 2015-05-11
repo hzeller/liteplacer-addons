@@ -182,7 +182,8 @@ module inner_router_template(height=4) {
 
 module router_templates(height=4) {
     color("blue") outer_router_template(height=height);
-    color("red") inner_router_template(height=height);
+    // We print it next to each other to avoid sticking while printing.
+    color("red") translate([82,0,0]) inner_router_template(height=height);
 }
 
 // One of these is useful.
