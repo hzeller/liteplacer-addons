@@ -15,14 +15,14 @@ led_pcb_thick=1.8;
 led_holder_thick = led_thick + 2;
 led_holder_wall_thick=1;
 
-cone_len=32;           // <= camera length
-diffusor_pos=[10,20,30];  // position from top for diffusor inserts
+cone_len=25;           // <= camera length
+diffusor_pos=[3,13,23];  // position from top for diffusor inserts
 
-mount_hole_distance=30;  // Distance between mounting holes
+mount_hole_distance=32;  // Distance between mounting holes
 mount_hole_dia=6;
 mount_bracket_wide = mount_hole_distance + mount_hole_dia + 6;
 
-wall_thickness=0.4;
+wall_thickness=0.8;
 mount_wall_thickness=2;
 
 hood_widening = 10;   // how much hood is wider on the bottom than LED
@@ -105,7 +105,7 @@ module mount_bracket_base(wide=mount_bracket_wide, height=2) {
     translate([-wide/2, 0, 0]) cube([wide, mount_wall_thickness, height]);
 }
 
-module mount_bracket(height=20) {  // we have 20mm profile
+module mount_bracket(height=14) {  // we have 20mm profile
     difference() {
 	mount_bracket_base(height=height);
 	rotate([-90,0,0]) translate([0,0,-epsilon]) {
@@ -163,4 +163,3 @@ module print() {
 }
 
 print();
-//translate([0,0,-29]) cut_at_height(29);
