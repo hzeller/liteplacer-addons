@@ -1,4 +1,4 @@
-all : up-camera-funnel.stl down-camera-light.stl
+all : up-camera-funnel.stl down-camera-light.stl camera-bracket.stl
 
 %.stl: %.scad
 	openscad -o $@ -d $@.deps $<

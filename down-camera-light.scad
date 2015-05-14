@@ -16,6 +16,7 @@ led_holder_thick = led_thick + 2;
 led_holder_wall_thick=1;
 
 cone_len=25;           // <= camera length
+camera_dia=11;
 diffusor_pos=[3,13,23];  // position from top for diffusor inserts
 
 mount_hole_distance=32;  // Distance between mounting holes
@@ -105,7 +106,7 @@ module mount_bracket_base(wide=mount_bracket_wide, height=2) {
     translate([-wide/2, 0, 0]) cube([wide, mount_wall_thickness, height]);
 }
 
-module mount_bracket(height=14) {  // we have 20mm profile
+module mount_bracket(height=14) {
     difference() {
 	mount_bracket_base(height=height);
 	rotate([-90,0,0]) translate([0,0,-epsilon]) {
@@ -115,9 +116,9 @@ module mount_bracket(height=14) {  // we have 20mm profile
     }
 }
 
-module diffusor_cutout() {
-    cube([100,5,1], center=true);
-    cube([5,100,1], center=true);
+module diffusor_cutout(thick=1) {
+    cube([led_dia+hood_widening+10,5,thick], center=true);
+    cube([5,led_dia + hood_widening + 10,thick], center=true);
 }
 
 module assembly_without_diffusor() {
@@ -136,10 +137,10 @@ module assembly() {
 }
 
 // More for visual
-module cut_at_height_inner(pos=10) {
+module cut_at_height_inner(pos=10,thick=epsilon) {
     translate([0,0,pos]) intersection() {
 	filled_cone();
-	translate([0,0,-pos]) cube([100,100,epsilon], center=true);
+	translate([0,0,-pos]) cube([100,100,thick], center=true);
     }
 }
 
@@ -162,4 +163,23 @@ module print() {
     inner_led_transition(5);
 }
 
-print();
+module diffusor_template(pos=10,thick=0.2) {
+    difference() {
+	union() {
+	    diffusor_cutout(thick=thick);
+	    cut_at_height_inner(pos=pos,thick=thick);
+	}
+	translate([0,0,-0.5]) cylinder(r=camera_dia/2,h=1);
+    }
+}
+
+module print_diffusor_templates(thick=0.2) {
+    for (i = [0:1:len(diffusor_pos)-1]) {
+	translate([38*cos(i*360/3),38*sin(i*360/3),0]) diffusor_template(pos=diffusor_pos[i],thick=thick);
+    }
+}
+
+print_diffusor_templates(thick=0.4);
+//print();
+
+
