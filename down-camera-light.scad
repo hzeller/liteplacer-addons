@@ -178,8 +178,12 @@ module print_diffusor_templates(thick=0.2) {
 	translate([38*cos(i*360/3),38*sin(i*360/3),0]) diffusor_template(pos=diffusor_pos[i],thick=thick);
     }
 }
+module diffusor_templates_2d() {
+    projection() print_diffusor_templates();
+}
 
-print_diffusor_templates(thick=0.4);
+//print_diffusor_templates(thick=0.4);
+diffusor_templates_2d();
 //print();
 
 
