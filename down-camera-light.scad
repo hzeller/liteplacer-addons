@@ -15,8 +15,8 @@ led_pcb_thick=1.8;
 led_holder_thick = led_thick + 2;
 led_holder_wall_thick=1;
 
-cone_len=30;           // <= camera length
-diffusor_pos=[10,20];  // position from top for diffusor inserts
+cone_len=32;           // <= camera length
+diffusor_pos=[10,20,30];  // position from top for diffusor inserts
 
 mount_hole_distance=30;  // Distance between mounting holes
 mount_hole_dia=6;
